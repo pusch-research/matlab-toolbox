@@ -37,7 +37,7 @@ for isim = 1:length(FSTfilenames)
     %file_abs = os_path.abspath(inputfile);
     %file_rel = os_path.relpath(file_abs, batchDir);
 
-    command=sprintf('%s %s %s %s', pvpython, pythonPlotScript_rel, vtk_root, paraviewStateFile_rel);
+    command=sprintf('"%s" "%s" "%s" "%s"', pvpython, pythonPlotScript_rel, vtk_root, paraviewStateFile_rel);
     fprintf(fid,'%s\n', command);
     commands{isim} = command;
 end

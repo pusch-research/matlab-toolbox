@@ -7,26 +7,26 @@ function cellarray2csv(csvName, M, replaceFunction)
 %    replaceFunction: (optional) function to perform substitutions in mode description
 
 % --- Optional arguments
-if ~exist('replaceFunction', 'var'); replaceFunction=@(x)x; end;
+if ~exist('replaceFunction', 'var'); replaceFunction=@(x)x; end
 
 fid = fopen(csvName, 'w');
 for i = 1:size(M,1)
     for j = 1:size(M,2)
         if isnumeric(M{i,j})
-            fprintf(fid,'%f',M{i,j})
+            fprintf(fid,'%f',M{i,j});
         elseif ischar(M{i,j})
             s=M{i,j};
             s=replaceFunction(s);
             s=strrep(s,',',' '); % no matter what, we don't want commas in a csv file
-            fprintf(fid,'%s',s)
+            fprintf(fid,'%s',s);
         elseif islogical(M{i,j})
-            fprintf(fid,'%d',M{i,j})
+            fprintf(fid,'%d',M{i,j});
         else
             keyboard
             error('TODO, find out this datatype and adapt this function')
         end
         if j<size(M,2)
-            fprintf(fid,',')
+            fprintf(fid,',');
         end
     end
     fprintf(fid,'\n');

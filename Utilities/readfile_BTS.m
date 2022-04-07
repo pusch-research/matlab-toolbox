@@ -1,4 +1,4 @@
-function [velocity, twrVelocity, y, z, zTwr, nz, ny, dz, dy, dt, zHub, z1,mffws] = readfile_BTS(FileName,fileFmt)
+function [velocity, twrVelocity, y, z, zTwr, nz, ny, dz, dy, dt, zHub, z1,mffws] = readfile_BTS(FileName,fileFmt,enableDisp)
 %[velocity, twrVelocity, y, z, zTwr, nz, ny, dz, dy, dt, zHub, z1,mffws] = readfile_BTS(FileName,fileFmt)
 % Author: Bonnie Jonkman, National Renewable Energy Laboratory
 %
@@ -58,9 +58,11 @@ if fid > 0
     nchar    = fread( fid, 1, 'int32');     % the number of characters in the description string, max 200, INT(4)
     asciiINT = fread( fid, nchar, 'int8' ); % the ASCII integer representation of the character string
     asciiSTR = char( asciiINT' );
-
-    disp( ['Reading from the file ' FileName ' with heading: ' ] );
-    disp( ['   "' asciiSTR '".' ] ) ;
+    
+    if nargin>2 && enableDisp
+        disp( ['Reading from the file ' FileName ' with heading: ' ] );
+        disp( ['   "' asciiSTR '".' ] ) ;
+    end
 
     %-------------------------        
     % get the grid information
