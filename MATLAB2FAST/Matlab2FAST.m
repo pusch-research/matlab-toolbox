@@ -363,8 +363,8 @@ function [line] = GetLineToWrite( line, FastPar, label, TemplateFile, value )
             writeVal = [val2Write repmat(' ',1,max(1,11-length(val2Write)))];
         end
 
-
-        idx = strfind( line, label ); %let's just take the line starting where the label is first listed            
+%         idx = strfind( line,  label );  %let's just take the line starting where the label is first listed 
+        idx = strfind( line, [' ' label ' '] ); % assume there is a blank before and after label 22-04-07 manuel.pusch@colorado.edu         
         line = [writeVal '   ' line(idx(1):end)];            
 
     else

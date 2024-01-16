@@ -19,7 +19,7 @@ end
 
 if ~found
     i = length(FASTPar.Label) + 1;
-    disp(['Parameter ' Par ' not found; adding it to data structure.'])
+    error(['Parameter ' Par ' not found; adding it to data structure.']) % 22-04-11 manuel.pusch@colorado.edu
     FASTPar.Label{i} = Par;
     FASTPar.Val{i} = Value;
 end
