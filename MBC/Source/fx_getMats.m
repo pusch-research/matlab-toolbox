@@ -216,7 +216,12 @@ end
 
 %% Find the indices for control input triplets in the rotating frame:
 if (matData.NumInputs > 0)
-    [matData.RotTripletIndicesCntrlInpt, matData.n_RotTripletInputs] = findBladeTriplets(data(1).u_rotFrame,matData.DescCntrlInpt );
+    try
+        [matData.RotTripletIndicesCntrlInpt, matData.n_RotTripletInputs] = findBladeTriplets(data(1).u_rotFrame,matData.DescCntrlInpt );
+    catch
+        matData.RotTripletIndicesCntrlInpt = [];
+        matData.n_RotTripletInputs = 0;
+    end
 else
     matData.RotTripletIndicesCntrlInpt = [];
     matData.n_RotTripletInputs = 0;
