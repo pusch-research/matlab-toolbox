@@ -118,7 +118,14 @@ function [op, desc, RF, DerivOrd] = readLinTable(fid,n)
     fgetl(fid); % table header row 2
     
     for row=1:n
-        line = fgetl(fid);
+        while true
+            line = fgetl(fid);
+            if ~isempty(line) && line(1)==' '
+                break;
+            else
+%                 disp([num2str(row) ' ' line])
+            end
+        end
         [C,pos] = textscan( line, '%*f %f %s %f',1 );
         if strcmp(C{2}(end),',') %we've got an orientation line (first string ends in comma instead of T/F):    
             [C,pos] = textscan( line, '%*f %f %*s %f %*s %f %s %f',1 );
@@ -139,6 +146,10 @@ function [op, desc, RF, DerivOrd] = readLinTable(fid,n)
     end
     
 
-    fgetl(fid); % skip a blank line
+    line=fgetl(fid); % skip a blank line
+    while ~(isempty(line) || line(1)==' ')
+%         disp('damaged')
+        line=fgetl(fid); % skip another line bc last line is damaged
+    end
 return
 end
